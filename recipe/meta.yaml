@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 3ca0a607892317ba306a0e2d0a9d0bc6a856771c0c683cb5db3eddfec083d762
 
 build:
@@ -17,7 +17,7 @@ build:
     - GEOMODELS_IGNORE_BUNDLED_LIBS=TRUE
     - GEOMODELS_GEOGRAPHICLIB_NAME=GeographicLib-i  # [win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 2
+  number: 3
 
 requirements:
   build:
