@@ -40,7 +40,6 @@ requirements:
 test:
   imports:
     - geomodels
-    - geomodels.tests
   requires:
     - pip
     - pytest
