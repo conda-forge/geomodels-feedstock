@@ -48,7 +48,7 @@ test:
     - geomodels-cli --help
     - geomodels-cli install-data -d data recommended
     - python -m geomodels info
-    - env GEOGRAPHICLIB_DATA=./data python -m pytest --pyargs geomodels
+    - env GEOGRAPHICLIB_DATA=./data python -m pytest tests
 
 about:
   home: https://github.com/avalentino/geomodels
