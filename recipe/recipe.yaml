@@ -1,0 +1,80 @@
+schema_version: 1
+
+context:
+  name: geomodels
+  version: "1.0.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/${{ name }}-${{ version }}.tar.gz
+  sha256: 41869b79eb26151a8b7fa3ed8f604312f338a16ef0d9f8248639a0e691967914
+
+build:
+  number: 2
+  skip: match(python, "<3.10")
+  script:
+    env:
+      GEOMODELS_IGNORE_BUNDLED_LIBS: true
+      GEOMODELS_GEOGRAPHICLIB_NAME: GeographicLib-i
+    content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - geomodels-cli = geomodels.cli:main
+
+requirements:
+  build:
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib('c') }}
+  host:
+    - python
+    - cython
+    - geographiclib-cpp >=2.0
+    - numpy
+    - pip
+    - setuptools
+  run:
+    - argcomplete
+    - geographiclib-cpp >=2.0
+    - numpy
+    - python
+    - tqdm
+
+tests:
+  - python:
+      imports:
+        - geomodels
+      pip_check: true
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - pip
+        - pytest
+    script:
+      - geomodels-cli --help
+      - geomodels-cli install-data -d data recommended
+      - python -m geomodels info
+      - env GEOGRAPHICLIB_DATA=./data python -m pytest tests
+
+about:
+  summary: Python package for Earth data models management
+  description: |
+    GeoModels provides tools for the management of Earth models like
+    geoids, gravity models, and magnetic field models.
+    It also provides some utility function to download and install
+    support data to that are necessary for Earth models computation.
+    It is basically a Cython_ wrapper for part of the the GeographicLib
+    C++ library.
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/avalentino/geomodels
+  repository: https://github.com/avalentino/geomodels
+  documentation: https://geomodels.readthedocs.io
+
+extra:
+  recipe-maintainers:
+    - avalentino
