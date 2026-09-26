@@ -17,7 +17,7 @@ build:
     - GEOMODELS_IGNORE_BUNDLED_LIBS=TRUE
     - GEOMODELS_GEOGRAPHICLIB_NAME=GeographicLib-i  # [win]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   build:
