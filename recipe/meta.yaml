@@ -15,7 +15,7 @@ build:
     - geomodels-cli = geomodels.cli:main
   script_env:
     - GEOMODELS_IGNORE_BUNDLED_LIBS=TRUE
-    - GEOMODELS_GEOGRAPHICLIB_NAME=GeographicLib-i  # [win]
+    - GEOMODELS_GEOGRAPHICLIB_NAME=GeographicLib-i
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 1
 
