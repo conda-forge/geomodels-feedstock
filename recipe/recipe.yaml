@@ -18,7 +18,7 @@ build:
   script:
     env:
       GEOMODELS_IGNORE_BUNDLED_LIBS: true
-      GEOMODELS_GEOGRAPHICLIB_NAME: ${{ GeographicLib-i if win else GeographicLib }}
+      GEOMODELS_GEOGRAPHICLIB_NAME: ${{ "GeographicLib-i" if win else "GeographicLib" }}
     content: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   python:
     entry_points:
